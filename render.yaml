@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: selfcare-music-live
+    runtime: python
+    plan: starter
+    buildCommand: "true"
+    startCommand: python3 server.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: MUSIC_DATA_DIR
+        value: /var/data
+      - key: LIVE_REFRESH_SECONDS
+        value: "180"
+      - key: LIVE_WORKER_POLL_SECONDS
+        value: "30"
+      - key: LIVE_MAX_REFRESH_PER_CYCLE
+        value: "6"
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+      - key: AUDD_API_TOKEN
+        sync: false
+    disk:
+      name: data
+      mountPath: /var/data
