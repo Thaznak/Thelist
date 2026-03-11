@@ -2,13 +2,13 @@ services:
   - type: web
     name: selfcare-music-live
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: "true"
     startCommand: python3 server.py
     healthCheckPath: /healthz
     envVars:
       - key: MUSIC_DATA_DIR
-        value: /var/data
+        value: /tmp
       - key: LIVE_REFRESH_SECONDS
         value: "180"
       - key: LIVE_WORKER_POLL_SECONDS
@@ -21,6 +21,3 @@ services:
         sync: false
       - key: AUDD_API_TOKEN
         sync: false
-    disk:
-      name: data
-      mountPath: /var/data
